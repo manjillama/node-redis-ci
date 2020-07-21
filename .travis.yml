@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '8'
+  - '10'
 dist: trusty # Operating system, trusty is small version of linux
 services: # After trusty is installed start mongodb and redis-srever instance as well
   - mongodb
