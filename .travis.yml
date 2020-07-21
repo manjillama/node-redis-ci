@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - '8'
+dist: trusty # Operating system, trusty is small version of linux
+services: # After trusty is installed start mongodb and redis-srever instance as well
+  - mongodb
+  - redis-server
+env:
+  - NODE_ENV=ci PORT=3000
+cache: # Reuse the same node_modules to speed up the installation (Optional)
+  directories:
+    - node_modules
+    - client/node_modules
+install:
+  - npm install
+  - npm run build
+script:
+  - nohup npm run start & # nohup - even if shell is closed, don't kill process | & - run in background mode
+  - sleep 3 # wait for 3 second | waiting for our server to start and get ready
+  - npm run test
